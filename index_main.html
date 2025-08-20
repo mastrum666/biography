@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex,nofollow">
+    <title>@mastrum666</title>
+	<meta http-equiv="X-Frame-Options" content="DENY">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            cursor: none;
+        }
+        
+        ::selection {
+            background: #ffffff;
+            color: #ffffff;
+        }
+        
+        body {
+            background-color: #000;
+            color: #fff;
+            overflow: hidden;
+            height: 100vh;
+            position: relative;
+        }
+        
+        .background-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+        
+        .snowflakes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .snowflake {
+            position: absolute;
+            color: #fff;
+            font-size: 24px;
+            opacity: 0.8;
+            animation: fall linear infinite;
+        }
+        
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+        
+        .enter-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            cursor: pointer;
+        }
+        
+        .enter-text {
+            font-weight: 700;
+            font-size: 30px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+        
+        .content-container {
+            max-width: 40rem;
+            margin: 0 auto;
+            padding: 35px 15px;
+            background: rgba(255, 255, 255, 0);
+            border-radius: 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .profile-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 35px;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+        
+        .username {
+            font-weight: 600;
+            font-size: 39.5px;
+            margin-bottom: 10px;
+            text-shadow: 0 0 16.5px #ffffff;
+        }
+        
+        .description {
+            font-weight: 570;
+            font-size: 19px;
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+        
+        .location {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-weight: 450;
+            font-size: 15px;
+            opacity: 0.8;
+            margin-bottom: 20px;
+        }
+        
+        .discord-status {
+            background: rgba(255, 255, 255, 0.07);
+            border: 2px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.22);
+            border: 2px solid rgba(255, 255, 255, 0.12);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            background: rgba(255, 255, 255, 0.32);
+            border: 2px solid rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+        }
+        
+        .social-icon svg {
+            width: 24px;
+            height: 24px;
+            color: #ffffff;
+            filter: drop-shadow(#ffffff 1px 0 7px);
+        }
+        
+        .volume-control {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.07);
+            padding: 10px 15px;
+            border-radius: 12px;
+            z-index: 5;
+        }
+        
+        .views-counter {
+            position: fixed;
+            bottom: 12px;
+            left: 15px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-weight: 550;
+            font-size: 14px;
+            z-index: 5;
+        }
+
+        .cursor-dot {
+            position: fixed;
+            width: 6px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.3s ease;
+        }
+        
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <video autoplay muted loop class="background-video">
+        <source src="video.mp4" type="video/mp4">
+    </video>
+    
+    <div class="snowflakes" id="snowflakes"></div>
+    
+    <div class="enter-overlay" id="enterOverlay">
+        <div class="enter-text">click to enter...</div>
+    </div>
+    
+    <div class="content-container hidden" id="mainContent"></div>
+	
+	<div style="position: fixed; bottom: 10px; right: 10px; color: rgba(255,255,255,0.05); font-size: 12px; pointer-events: none; z-index: 9999;">
+		All rights reserved, owned by @mastrum666 <br>
+		@mastrum666 — property of αrchive::core
+	</div>
+    
+    <div class="views-counter">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M12 9a3 3 0 0 0-3 3a3 3 0 0 0 3 3a3 3 0 0 0 3-3a3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5a5 5 0 0 1 5-5a5 5 0 0 1 5 5a5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5"></path>
+        </svg>
+        <span>666</span>
+    </div>
+
+    <script src="mastrum_say_hello.js" defer></script>
+
+	<body oncontextmenu="return false;" onselectstart="return false;" ondragstart="return false;">
+<div id="custom-cursor" style="position: fixed; width: 16px; height: 16px; background: url('cursor.png') no-repeat; background-size: contain; pointer-events: none; z-index: 9999; left: -50px;"></div>
+</body>
+</html>
